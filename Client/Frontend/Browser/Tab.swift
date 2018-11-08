@@ -223,7 +223,7 @@ class Tab: NSObject {
 
             webView.accessibilityLabel = NSLocalizedString("Web content", comment: "Accessibility label for the main web content view")
             webView.allowsBackForwardNavigationGestures = true
-            webView.allowsLinkPreview = false
+            webView.allowsLinkPreview = true
 
             // Night mode enables this by toggling WKWebView.isOpaque, otherwise this has no effect.
             webView.backgroundColor = .black

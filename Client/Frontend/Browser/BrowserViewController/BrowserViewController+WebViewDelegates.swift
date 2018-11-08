@@ -93,6 +93,20 @@ extension BrowserViewController: WKUIDelegate {
             }
         }
     }
+
+    func webView(_ webView: WKWebView, previewingViewControllerForElement elementInfo: WKPreviewElementInfo, defaultActions previewActions: [WKPreviewActionItem]) -> UIViewController? {
+        guard let url = elementInfo.linkURL else { return nil }
+        let request = URLRequest(url: url)
+        let previewingController = PreviewingWebViewController(request: request, configuration: webView.configuration)
+        return previewingController
+    }
+
+    func webView(_ webView: WKWebView, commitPreviewingViewController previewingViewController: UIViewController) {
+        guard let vc = previewingViewController as? PreviewingWebViewController else { return }
+        // Need to reload the request
+        guard let url = vc.request.url else { return }
+        webView.load(URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60))
+    }
 }
 
 extension WKNavigationAction {
@@ -442,6 +456,32 @@ extension BrowserViewController: WKNavigationDelegate {
                     }
                 }
             }
+        }
+    }
+}
+
+
+private class PreviewingWebViewController: UIViewController {
+
+    private let webView: WKWebView
+    let request: URLRequest
+
+    init(request: URLRequest, configuration: WKWebViewConfiguration) {
+        self.request = request
+        webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.load(request)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(webView)
+        webView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }
