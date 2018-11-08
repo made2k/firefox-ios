@@ -3394,7 +3394,9 @@
 				D39FA1601A83E0EC00EE869C /* UITests */,
 				3BFE4B081D342FB900DDF53F /* XCUITests */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		F84B21BF1A090F8100AAB793 /* Products */ = {
 			isa = PBXGroup;

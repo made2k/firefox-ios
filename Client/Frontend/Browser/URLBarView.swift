@@ -386,7 +386,6 @@ class URLBarView: UIView {
 
     func updateAlphaForSubviews(_ alpha: CGFloat) {
         locationContainer.alpha = alpha
-        self.alpha = alpha
     }
 
     func updateProgressBar(_ progress: Float) {
