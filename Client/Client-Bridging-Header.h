@@ -15,4 +15,6 @@
 #import "Shared-Bridging-Header.h"
 #import "Storage-Bridging-Header.h"
 
+#import "Parser.h"
+
 #endif

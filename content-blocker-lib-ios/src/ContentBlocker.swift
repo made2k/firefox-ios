@@ -4,6 +4,13 @@
 
 import WebKit
 import Deferred
+import PromiseKit
+
+enum BlocklistSelectionType {
+    case basic
+    case strict
+    case adguard
+}
 
 enum BlocklistName: String {
     case advertising = "disconnect-advertising"
@@ -59,11 +66,23 @@ class ContentBlocker {
         removeOldListsByDateFromStore() {
             self.removeOldListsByNameFromStore() {
                 self.compileListsNotInStore {
-                    self.setupCompleted = true
-                    NotificationCenter.default.post(name: .contentBlockerTabSetupRequired, object: nil)
+                    self.compileAdguardLists {
+                        self.setupCompleted = true
+                        NotificationCenter.default.post(name: .contentBlockerTabSetupRequired, object: nil)
+                    }
                 }
             }
         }
+    }
+
+    private func compileAdguardLists(completion: @escaping () -> Void) {
+        firstly {
+            AdguardLoader.shared.getLists()
+
+        }.done { _ in
+            completion()
+
+        }.cauterize()
     }
 
     func prefsChanged() {
@@ -73,6 +92,36 @@ class ContentBlocker {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    private var adguardLoadPromise: Promise<[WKContentRuleList]> = .value([])
+
+    func setupAdguardProtection(forTab tab: ContentBlockerTab, isEnabled: Bool) {
+        removeTrackingProtection(forTab: tab)
+
+        guard isEnabled else {
+            return
+        }
+
+        let promise: Promise<[WKContentRuleList]>
+
+        if adguardLoadPromise.isResolved == false {
+            promise = adguardLoadPromise
+
+        } else {
+            promise = firstly {
+                AdguardLoader.shared.getLists()
+            }
+        }
+
+        promise.done { results in
+
+            results.forEach { ruleList in
+                self.add(contentRuleList: ruleList, toTab: tab)
+            }
+
+        }.cauterize()
+
     }
 
     // Function to install or remove TP for a tab

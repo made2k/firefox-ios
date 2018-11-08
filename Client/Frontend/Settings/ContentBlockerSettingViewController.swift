@@ -48,6 +48,8 @@ extension BlockingStrength {
             return Strings.TrackingProtectionOptionBlockListTypeBasic
         case .strict:
             return Strings.TrackingProtectionOptionBlockListTypeStrict
+        case .adguard:
+            return Strings.TrackingProtectionOptionBlockListTypeAdguard
         }
     }
 
@@ -57,6 +59,9 @@ extension BlockingStrength {
             return Strings.TrackingProtectionOptionBlockListTypeBasicDescription
         case .strict:
             return Strings.TrackingProtectionOptionBlockListTypeStrictDescription
+        case .adguard:
+            return Strings.TrackingProtectionOptionBlockListTypeAdguardDescription
+
         }
     }
 
@@ -66,6 +71,8 @@ extension BlockingStrength {
             return "Settings.TrackingProtectionOption.BlockListBasic"
         case .strict:
             return "Settings.TrackingProtectionOption.BlockListStrict"
+        case .adguard:
+            return "Settings.TrackingProtectionOption.Adguard"
         }
     }
 }

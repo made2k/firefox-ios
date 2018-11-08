@@ -22,8 +22,9 @@ struct ContentBlockingConfig {
 enum BlockingStrength: String {
     case basic
     case strict
+    case adguard
 
-    static let allOptions: [BlockingStrength] = [.basic, .strict]
+    static let allOptions: [BlockingStrength] = [.basic, .strict, .adguard]
 }
 
 /**
@@ -73,8 +74,14 @@ class FirefoxTabContentBlocker: TabContentBlocker, TabContentScript {
 
     func setupForTab() {
         guard let tab = tab else { return }
-        let rules = BlocklistName.forStrictMode(isOn: blockingStrengthPref == .strict)
-        ContentBlocker.shared.setupTrackingProtection(forTab: tab, isEnabled: isEnabled, rules: rules)
+
+        if blockingStrengthPref == .adguard {
+            ContentBlocker.shared.setupAdguardProtection(forTab: tab, isEnabled: isEnabled)
+
+        } else {
+            let rules = BlocklistName.forStrictMode(isOn: blockingStrengthPref == .strict)
+            ContentBlocker.shared.setupTrackingProtection(forTab: tab, isEnabled: isEnabled, rules: rules)
+        }
     }
 
     @objc override func notifiedTabSetupRequired() {

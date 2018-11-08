@@ -17,6 +17,8 @@ public extension Logger {
     /// Logger used for recording frontend/browser happenings
     static let browserLogger = RollingFileLogger(filenameRoot: "browser", logDirectoryPath: Logger.logFileDirectoryPath(inDocuments: saveLogsToDocuments))
 
+    static let customLogger = RollingFileLogger(filenameRoot: "custom", logDirectoryPath: Logger.logFileDirectoryPath(inDocuments: saveLogsToDocuments))
+
     /// Logger used for recording interactions with the keychain
     static let keychainLogger: XCGLogger = Logger.fileLoggerWithName("keychain")
 
