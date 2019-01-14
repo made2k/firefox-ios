@@ -6,7 +6,7 @@ import Alamofire
 import Foundation
 import Shared
 
-let SearchSuggestClientErrorDomain = "org.mozilla.firefox.SearchSuggestClient"
+let SearchSuggestClientErrorDomain = "com.zachmcgaughey.firefox.SearchSuggestClient"
 let SearchSuggestClientErrorInvalidEngine = 0
 let SearchSuggestClientErrorInvalidResponse = 1
 

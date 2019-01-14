@@ -12,7 +12,7 @@ import Deferred
 private let log = Logger.syncLogger
 
 // TODO: fill this in!
-private let KeyUnwrappingError = NSError(domain: "org.mozilla", code: 1, userInfo: nil)
+private let KeyUnwrappingError = NSError(domain: "com.zachmcgaughey", code: 1, userInfo: nil)
 
 protocol FxALoginClient {
     func keyPair() -> Deferred<Maybe<KeyPair>>

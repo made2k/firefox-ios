@@ -74,7 +74,7 @@ enum NavigationPath {
 
         guard let urlTypes = Bundle.main.object(forInfoDictionaryKey: "CFBundleURLTypes") as? [AnyObject],
             let urlSchemes = urlTypes.first?["CFBundleURLSchemes"] as? [String] else {
-            // Something very strange has happened; org.mozilla.Client should be the zeroeth URL type.
+            // Something very strange has happened; com.zachmcgaughey.Client should be the zeroeth URL type.
             return nil
         }
 

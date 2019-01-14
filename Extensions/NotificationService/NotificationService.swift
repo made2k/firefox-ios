@@ -182,7 +182,7 @@ extension SyncDataDisplay {
         // We will need to be more precise about calling these SentTab alerts
         // once we are a) detecting different types of notifications and b) adding actions.
         // For now, we need to add them so we can handle zero-tab sent-tab-notifications.
-        notificationContent.categoryIdentifier = "org.mozilla.ios.SentTab.placeholder"
+        notificationContent.categoryIdentifier = "com.zachmcgaughey.ios.SentTab.placeholder"
 
         var userInfo = notificationContent.userInfo
 
