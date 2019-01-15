@@ -386,6 +386,9 @@ class URLBarView: UIView {
 
     func updateAlphaForSubviews(_ alpha: CGFloat) {
         locationContainer.alpha = alpha
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.alpha = alpha
+        }
     }
 
     func updateProgressBar(_ progress: Float) {
