@@ -5,7 +5,7 @@
 import UIKit
 import SnapKit
 
-private let ToolbarBaseAnimationDuration: CGFloat = 0.054
+private let ToolbarBaseAnimationDuration: CGFloat = 0.2
 
 class TabScrollingController: NSObject {
     enum ScrollDirection {
