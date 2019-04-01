@@ -15,6 +15,7 @@
 #import "Shared-Bridging-Header.h"
 #import "Storage-Bridging-Header.h"
 
-#import "Parser.h"
+#import "AdblockParser.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
 #endif

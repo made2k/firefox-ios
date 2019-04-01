@@ -28,7 +28,7 @@ class AdguardLoader: NSObject {
 
     static let shared = AdguardLoader()
 
-    private let parser = Parser()
+    private let parser = AdblockParser()
     private let lists: [(String, String)]
 
     private override init() {
